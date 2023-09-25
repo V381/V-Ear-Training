@@ -32,4 +32,5 @@
 
 .nav-buttons.intervals.play-button > button{
     width: 30%;
+    font-size: 1em;
 }

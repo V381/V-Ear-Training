@@ -1,4 +1,4 @@
-.fret-board{
+/* .fret-board{
     position:relative;
     margin-top:40px;
     left:50%;
@@ -364,3 +364,20 @@
     opacity:0;
     transition:0.5s ease-in-out
 }
+
+.notes .mask.a{
+    bottom:47px
+}
+.notes .mask.d{
+    bottom:93px
+}
+.notes .mask.g{
+    bottom:137px
+}
+.notes .mask.b{
+    bottom:181px
+}
+.notes .mask.high-e{
+    bottom:224px
+}
+ */
