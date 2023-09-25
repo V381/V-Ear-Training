@@ -29,3 +29,7 @@
 .nav-buttons.intervals > button {
     font-size: 1rem;
 }
+
+.nav-buttons.intervals.play-button > button{
+    width: 30%;
+}
