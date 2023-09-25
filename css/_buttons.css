@@ -25,3 +25,7 @@
     background-color: darkred;
     transition: 0.5 ease-in-out;
 }
+
+.nav-buttons.intervals > button {
+    font-size: 1rem;
+}
