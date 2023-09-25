@@ -30,3 +30,8 @@ header {
 .headline::first-letter {
     color: red;
 }
+
+.center {
+    height: 100%;
+    padding-top: 20%;
+}
