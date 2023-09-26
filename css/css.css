@@ -59,3 +59,10 @@ header {
     color: red;
     font-size: 2rem;
 }
+
+h2 {
+    color: white;
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
