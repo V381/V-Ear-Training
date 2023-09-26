@@ -3,13 +3,15 @@
     <head>
         <title>V-Ear Training For Guitar</title>
         <link type="text/css" rel="stylesheet" href="css/css.css">
+        <meta name="author" content="Pavle Paunovic">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <header>
             <h1 class="headline">V Ear Training</h1>
             <nav class="nav-buttons">
                 <button>Intervals</button>
-                <button disabled>Chord Progressions</button>
+                <button disabled title="Coming soon....">Chord Progressions</button>
             </nav>
         </header>
         <main>
@@ -56,6 +58,10 @@
                         </div>
                     </div>
                 </section>
+                <section class="score">
+                    <p class="score__correct">0</p>
+                    <p class="score__incorrect">0</p>
+                </section>
                 <section class="nav-buttons intervals">
                     <button>Minor 1rd</button>
                     <button>Major 2rd</button>
@@ -72,7 +78,6 @@
                 </section>
                 <section class="nav-buttons play-button">
                     <button class="play-button__play">Play</button>
-                    <button class="play-button__repeat">Repeat</button>
                 </section>
                 <div class="slider-container">
                     <div class="slider">
