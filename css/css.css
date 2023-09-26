@@ -37,3 +37,25 @@ header {
 .center {
     height: 100%;
 }
+
+
+.correct-guess {
+    background-color: #6aff6a;
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.score__correct {
+    color: green;
+    font-size: 2rem;
+    padding-right: 1rem;
+}
+
+.score__incorrect {
+    color: red;
+    font-size: 2rem;
+}

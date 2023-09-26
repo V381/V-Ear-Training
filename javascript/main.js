@@ -1,10 +1,15 @@
 const $ = document;
 
 const play = $.querySelector(".play-button__play");
+const intervalButtons = $.querySelectorAll(".intervals button");
 const intervals = $.querySelectorAll(".intervals button");
 const repeatButton = document.querySelector(".play-button__repeat");
+
 let lastPlayedNotes = null;
 const audioFiles = {};
+
+let isPlaying = false;
+let correctInterval = null;
 
 const keyToNote = {
     'a': 'C',
@@ -61,52 +66,52 @@ function resetKeyColor(key) {
     key.style.backgroundColor = '';
 }
 
-function addActionToIntervalButton(button) {
-    button.addEventListener("click", (e) => {
-        console.log(e.target.innerHTML);
-    });
-}
-
 function addActionToPlayButton() {
-    let isPlaying = false;
     let notesToPlay = null;
 
-    function getRandomNote() {
-        const notes = Object.values(keyToNote);
-        const randomIndex1 = Math.floor(Math.random() * notes.length);
-        let randomIndex2 = Math.floor(Math.random() * notes.length);
-
-        while (randomIndex2 === randomIndex1) {
-            randomIndex2 = Math.floor(Math.random() * notes.length);
-        }
-
-        return [notes[randomIndex1], notes[randomIndex2]];
+    function getRandomInterval() {
+        const intervals = [
+            "Minor 1st",
+            "Major 2nd",
+            "Minor 3rd",
+            "Major 3rd",
+            "Perfect 4",
+            "Tritone",
+            "Perfect 5",
+            "Minor 6",
+            "Major 6",
+            "Minor 7",
+            "Major 7"
+        ];
+        const randomIndex = Math.floor(Math.random() * intervals.length);
+        console.log(intervals[randomIndex], "<<<<<<<<<<<");
+        return intervals[randomIndex];
     }
 
     function playRandomNotes() {
-        const [note1, note2] = getRandomNote();
+        correctInterval = getRandomInterval(); 
+        const [note1, note2] = getRandomNotesForInterval(correctInterval);
+        console.log(`Interval to guess: ${correctInterval}`);
         playNoteByKey(note1);
-        setTimeout(() => playNoteByKey(note2), 1000); 
-        lastPlayedNotes = [note1, note2]; 
+        setTimeout(() => playNoteByKey(note2), 1000);
+        lastPlayedNotes = [note1, note2];
     }
     
-    function addActionToRepeatButton() {
-        repeatButton.addEventListener("click", () => {
-            if (lastPlayedNotes) {
-                playNoteByKey(lastPlayedNotes[0]);
-                setTimeout(() => playNoteByKey(lastPlayedNotes[1]), 1000);
-            }
-        });
-    }
-    
-    addActionToRepeatButton();
-
-    function checkGuess(button) {
-        if (isPlaying) {
-            isPlaying = false; 
-            const guessedInterval = button.innerHTML;
-            console.log(`Guessed: ${guessedInterval}`);
-        }
+    function getRandomNotesForInterval(interval) {
+        const intervalsToNotes = {
+            "Minor 1st": ["C", "Csharp"],
+            "Major 2nd": ["C", "D"],
+            "Minor 3rd": ["C", "Dsharp"],
+            "Major 3rd": ["C", "E"],
+            "Perfect 4": ["C", "F"],
+            "Tritone": ["C", "Fsharp"],
+            "Perfect 5": ["C", "G"],
+            "Minor 6": ["C", "Gsharp"],
+            "Major 6": ["C", "A"],
+            "Minor 7": ["C", "Asharp"],
+            "Major 7": ["C", "B"]
+        };
+        return intervalsToNotes[interval];
     }
 
     if (!isPlaying) {
@@ -119,16 +124,18 @@ function addActionToPlayButton() {
         }
     }
 
-    intervals.forEach((button) => {
+    intervalButtons.forEach((button) => {
+        addActionToIntervalButton(button);
         button.addEventListener("click", () => {
             checkGuess(button);
-            notesToPlay = null; 
+            notesToPlay = null;
         });
     });
 }
 
-intervals.forEach(addActionToIntervalButton);
 play.addEventListener("click", addActionToPlayButton);
+
+intervals.forEach(addActionToIntervalButton);
 
 const slider = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
@@ -164,3 +171,31 @@ nextButton.addEventListener('click', () => {
 });
 
 showSlide(currentSlide);
+
+let correctScore = 0;
+let incorrectScore = 0;
+const correct = $.querySelector(".score__correct");
+const scoreIncorrect = $.querySelector(".score__incorrect");
+
+function checkGuess(button) {
+    if (isPlaying) {
+        isPlaying = false; 
+        const guessedInterval = button.textContent;
+        console.log(`Guessed: ${guessedInterval}`);
+        if (correctInterval === guessedInterval) {
+            correctScore++
+            correct.innerHTML = correctScore;
+            console.log("Correct guess!");
+        } else {
+            incorrectScore--;
+            scoreIncorrect.innerHTML = incorrectScore;
+            console.log("WRONG!");
+        }
+    }
+}
+
+function addActionToIntervalButton(button) {
+    button.addEventListener("click", () => {
+        checkGuess(button);
+    });
+};
