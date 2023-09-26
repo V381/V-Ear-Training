@@ -99,7 +99,7 @@ function addActionToPlayButton() {
     
     function getRandomNotesForInterval(interval) {
         const intervalsToNotes = {
-            "Minor 1st": ["C", "Csharp"],
+            "Minor 2nd": ["C", "Csharp"],
             "Major 2nd": ["C", "D"],
             "Minor 3rd": ["C", "Dsharp"],
             "Major 3rd": ["C", "E"],
