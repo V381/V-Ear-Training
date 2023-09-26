@@ -1,0 +1,49 @@
+
+.piano {
+    display: flex;
+    background-color: #333;
+    border: 1px solid #222;
+    border-radius: 5px;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.white-key {
+    width: 70px;
+    height: 250px;
+    background-color: white;
+    border-right: 1px solid #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.black-key {
+    width: 45px;
+    height: 160px;
+    background-color: black;
+    border-right: 1px solid #222;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.note-label {
+    color: red;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.white-key:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.black-key:hover {
+    background-color: rgb(34, 32, 32);
+    cursor: pointer;
+}

@@ -1,7 +1,7 @@
 
 @import url(_variables.css);
 @import url(_buttons.css);
-@import url(_guitar-neck.css);
+@import url(_piano.css);
 
 * {
     margin: 0;
@@ -33,5 +33,4 @@ header {
 
 .center {
     height: 100%;
-    padding-top: 20%;
 }
