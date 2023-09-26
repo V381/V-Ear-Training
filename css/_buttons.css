@@ -20,6 +20,10 @@
     transition: background-color 0.5s;
 }
 
+.nav-buttons > button:disabled {
+    background-color: grey;
+}
+
 .nav-buttons > button:hover {
     cursor: pointer;
     background-color: darkred;
