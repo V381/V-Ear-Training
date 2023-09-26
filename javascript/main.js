@@ -1,32 +1,40 @@
+
 const $ = document;
+const 
+    play = $.querySelector(".play-button__play"),
+    intervalButtons = $.querySelectorAll(".intervals button"),
+    intervals = $.querySelectorAll(".intervals button"),
+    repeatButton = $.querySelector(".play-button__repeat"),
+    slider = $.querySelector('.slider'),
+    slides = $.querySelectorAll('.slide'),
+    prevButton = $.querySelector('.prev-button'),
+    nextButton = $.querySelector('.next-button'),
+    audioFiles = {},
+    correct = $.querySelector(".score__correct"),
+    scoreIncorrect = $.querySelector(".score__incorrect"),
+    keyToNote = {
+        'a': 'C',
+        'w': 'Csharp',
+        's': 'D',
+        'e': 'Dsharp',
+        'd': 'E',
+        'f': 'F',
+        't': 'Fsharp',
+        'g': 'G',
+        'y': 'Gsharp',
+        'h': 'A',
+        'u': 'Asharp',
+        'j': 'B'
+    },
+    keys = $.querySelectorAll('.white-key, .black-key');
 
-const play = $.querySelector(".play-button__play");
-const intervalButtons = $.querySelectorAll(".intervals button");
-const intervals = $.querySelectorAll(".intervals button");
-const repeatButton = document.querySelector(".play-button__repeat");
-
-let lastPlayedNotes = null;
-const audioFiles = {};
-
-let isPlaying = false;
-let correctInterval = null;
-
-const keyToNote = {
-    'a': 'C',
-    'w': 'Csharp',
-    's': 'D',
-    'e': 'Dsharp',
-    'd': 'E',
-    'f': 'F',
-    't': 'Fsharp',
-    'g': 'G',
-    'y': 'Gsharp',
-    'h': 'A',
-    'u': 'Asharp',
-    'j': 'B'
-};
-
-const keys = document.querySelectorAll('.white-key, .black-key');
+let 
+    currentSlide = 0,
+    lastPlayedNotes = null;
+    isPlaying = false;
+    correctInterval = null,
+    correctScore = 0,
+    incorrectScore = 0;
 
 keys.forEach(key => {
     key.addEventListener('click', () => {
@@ -34,20 +42,20 @@ keys.forEach(key => {
     });
 });
 
-document.addEventListener('keydown', (event) => {
+$.addEventListener('keydown', (event) => {
     const note = keyToNote[event.key];
     if (note) {
         event.preventDefault();
         playNoteByKey(note);
-        const key = document.querySelector(`[data-note="${note}"]`);
+        const key = $.querySelector(`[data-note="${note}"]`);
         darkenKey(key);
     }
 });
 
-document.addEventListener('keyup', (event) => {
+$.addEventListener('keyup', (event) => {
     const note = keyToNote[event.key];
     if (note) {
-        const key = document.querySelector(`[data-note="${note}"]`);
+        const key = $.querySelector(`[data-note="${note}"]`);
         resetKeyColor(key);
     }
 });
@@ -91,7 +99,6 @@ function addActionToPlayButton() {
     function playRandomNotes() {
         correctInterval = getRandomInterval(); 
         const [note1, note2] = getRandomNotesForInterval(correctInterval);
-        console.log(`Interval to guess: ${correctInterval}`);
         playNoteByKey(note1);
         setTimeout(() => playNoteByKey(note2), 1000);
         lastPlayedNotes = [note1, note2];
@@ -134,62 +141,17 @@ function addActionToPlayButton() {
 }
 
 play.addEventListener("click", addActionToPlayButton);
-
 intervals.forEach(addActionToIntervalButton);
-
-const slider = document.querySelector('.slider');
-const slides = document.querySelectorAll('.slide');
-const prevButton = document.querySelector('.prev-button');
-const nextButton = document.querySelector('.next-button');
-
-let currentSlide = 0;
-
-function showSlide(index) {
-    if (index < 0) {
-        currentSlide = slides.length - 1;
-    } else if (index >= slides.length) {
-        currentSlide = 0;
-    }
-
-    for (let i = 0; i < slides.length; i++) {
-        if (i === currentSlide) {
-            slides[i].style.display = 'block';
-        } else {
-            slides[i].style.display = 'none';
-        }
-    }
-}
-
-prevButton.addEventListener('click', () => {
-    currentSlide--;
-    showSlide(currentSlide);
-});
-
-nextButton.addEventListener('click', () => {
-    currentSlide++;
-    showSlide(currentSlide);
-});
-
-showSlide(currentSlide);
-
-let correctScore = 0;
-let incorrectScore = 0;
-const correct = $.querySelector(".score__correct");
-const scoreIncorrect = $.querySelector(".score__incorrect");
-
 function checkGuess(button) {
     if (isPlaying) {
         isPlaying = false; 
         const guessedInterval = button.textContent;
-        console.log(`Guessed: ${guessedInterval}`);
         if (correctInterval === guessedInterval) {
             correctScore++
             correct.innerHTML = correctScore;
-            console.log("Correct guess!");
         } else {
             incorrectScore--;
             scoreIncorrect.innerHTML = incorrectScore;
-            console.log("WRONG!");
         }
     }
 }
