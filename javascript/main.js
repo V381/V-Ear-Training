@@ -92,7 +92,6 @@ function addActionToPlayButton() {
             "Major 7"
         ];
         const randomIndex = Math.floor(Math.random() * intervals.length);
-        console.log(intervals[randomIndex], "<<<<<<<<<<<");
         return intervals[randomIndex];
     }
 

@@ -1,0 +1,17 @@
+.view {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+  }
+  
+  .view.active {
+    opacity: 1;
+    height: auto;
+  }
+  
+  a.active-link {
+    background-color: darkred;
+    transition: background-color 0.5s ease-in-out;
+  }
+  

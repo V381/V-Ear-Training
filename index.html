@@ -10,7 +10,8 @@
         <header>
             <h1 class="headline">V Ear Training</h1>
             <nav class="nav-buttons">
-                <button>Intervals</button>
+                <a href="#" class="intervals-btn" data-view="intervals" id="intervals-Link">Intervals</a>
+                <a href="#" class="single-notes" data-view="singlenotes" id="singlenotes-Link">Single Notes</a>
             </nav>
         </header>
         <main>
@@ -58,146 +59,172 @@
                     </div>
                 </section>
                 <section class="score">
+                    <p class="score__total-score">Total Score</p>
+                </section>
+                <section class="score">
                     <p class="score__correct">0</p>
                     <p class="score__incorrect">0</p>
                 </section>
-                <section class="nav-buttons intervals">
-                    <button>Minor 2nd</button>
-                    <button>Major 2nd</button>
-                    <button>Major 3rd</button>
-                    <button>Minor 3rd</button>
-                    <button>Perfect 4</button>
-                    <button>Tritone</button>
-                    <button>Perfect 5</button>
-                    <button>Minor 6</button>
-                    <button>Major 6</button>
-                    <button>Minor 7</button>
-                    <button>Major 7</button>
-                    <button>Octave</button>
-                </section>
-                <section class="nav-buttons play-button">
-                    <button class="play-button__play">Play</button>
-                </section>
-                <div class="slider-container">
-                    <div class="slider">
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Minor Second (m2):</strong>
-                                    <p>Description: The minor second is a half-step or one semitone interval.</p>
-                                    <p>Recognizable Example: The first two notes of the "Jaws" theme are a minor second apart, creating a tense and dramatic effect.</p>
-                                </li>
-                            </ul>
+                <div id="intervalsView" class="view active">
+                    <section class="nav-buttons intervals" id="intervals">
+                        <button>Minor 2nd</button>
+                        <button>Major 2nd</button>
+                        <button>Major 3rd</button>
+                        <button>Minor 3rd</button>
+                        <button>Perfect 4</button>
+                        <button>Tritone</button>
+                        <button>Perfect 5</button>
+                        <button>Minor 6</button>
+                        <button>Major 6</button>
+                        <button>Minor 7</button>
+                        <button>Major 7</button>
+                        <button>Octave</button>
+                    </section>
+                    <section class="nav-buttons play-button">
+                        <button class="play-button__play">Play</button>
+                    </section>
+                    <div class="slider-container">
+                        <div class="slider">
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Minor Second (m2):</strong>
+                                        <p>Description: The minor second is a half-step or one semitone interval.</p>
+                                        <p>Recognizable Example: The first two notes of the "Jaws" theme are a minor second apart, creating a tense and dramatic effect.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Major Second (M2):</strong>
+                                        <p>Description: The major second is a whole-step or two semitones interval.</p>
+                                        <p>Recognizable Example: The first two notes of "Happy Birthday" are a major second apart.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Minor Third (m3):</strong>
+                                        <p>Description: The minor third is three semitones or half-steps apart.</p>
+                                        <p>Recognizable Example: The first two notes of "Greensleeves" form a minor third interval.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Major Third (M3):</strong>
+                                        <p>Description: The major third is four semitones or two whole-steps apart.</p>
+                                        <p>Recognizable Example: The opening notes of "When the Saints Go Marching In" are a major third apart.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Perfect Fourth (P4):</strong>
+                                        <p>Description: The perfect fourth is five semitones or two and a half whole-steps apart.</p>
+                                        <p>Recognizable Example: The first two notes of the "Wedding March" by Mendelssohn create a perfect fourth.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Tritone (A4/d5):</strong>
+                                        <p>Description: The tritone is six semitones or three whole-steps apart, and it's often considered dissonant.</p>
+                                        <p>Recognizable Example: The opening notes of the theme from "The Simpsons" feature a tritone.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Perfect Fifth (P5):</strong>
+                                        <p>Description: The perfect fifth is seven semitones or three and a half whole-steps apart.</p>
+                                        <p>Recognizable Example: The opening notes of "Star Wars" are a perfect fifth.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Minor Sixth (m6):</strong>
+                                        <p>Description: The minor sixth is eight semitones or four whole-steps apart.</p>
+                                        <p>Recognizable Example: The first two notes of "The Entertainer" by Scott Joplin are a minor sixth.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Major Sixth (M6):</strong>
+                                        <p>Description: The major sixth is nine semitones or four and a half whole-steps apart.</p>
+                                        <p>Recognizable Example: The first two notes of "My Bonnie Lies Over the Ocean" form a major sixth interval.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Minor Seventh (m7):</strong>
+                                        <p>Description: The minor seventh is ten semitones or five whole-steps apart.</p>
+                                        <p>Recognizable Example: The first two notes of the "Twilight Zone" theme are a minor seventh apart.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Major Seventh (M7):</strong>
+                                        <p>Description: The major seventh is eleven semitones or five and a half whole-steps apart.</p>
+                                        <p>Recognizable Example: The first two notes of "Take On Me" by A-ha create a major seventh interval.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slide">
+                                <ul>
+                                    <li>
+                                        <strong>Octave (P8):</strong>
+                                        <p>Description: The octave is twelve semitones or six whole-steps apart, and it's the same note name at a different register.</p>
+                                        <p>Recognizable Example: The famous "Somewhere Over the Rainbow" melody begins with an octave jump.</p>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Major Second (M2):</strong>
-                                    <p>Description: The major second is a whole-step or two semitones interval.</p>
-                                    <p>Recognizable Example: The first two notes of "Happy Birthday" are a major second apart.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Minor Third (m3):</strong>
-                                    <p>Description: The minor third is three semitones or half-steps apart.</p>
-                                    <p>Recognizable Example: The first two notes of "Greensleeves" form a minor third interval.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Major Third (M3):</strong>
-                                    <p>Description: The major third is four semitones or two whole-steps apart.</p>
-                                    <p>Recognizable Example: The opening notes of "When the Saints Go Marching In" are a major third apart.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Perfect Fourth (P4):</strong>
-                                    <p>Description: The perfect fourth is five semitones or two and a half whole-steps apart.</p>
-                                    <p>Recognizable Example: The first two notes of the "Wedding March" by Mendelssohn create a perfect fourth.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Tritone (A4/d5):</strong>
-                                    <p>Description: The tritone is six semitones or three whole-steps apart, and it's often considered dissonant.</p>
-                                    <p>Recognizable Example: The opening notes of the theme from "The Simpsons" feature a tritone.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Perfect Fifth (P5):</strong>
-                                    <p>Description: The perfect fifth is seven semitones or three and a half whole-steps apart.</p>
-                                    <p>Recognizable Example: The opening notes of "Star Wars" are a perfect fifth.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Minor Sixth (m6):</strong>
-                                    <p>Description: The minor sixth is eight semitones or four whole-steps apart.</p>
-                                    <p>Recognizable Example: The first two notes of "The Entertainer" by Scott Joplin are a minor sixth.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Major Sixth (M6):</strong>
-                                    <p>Description: The major sixth is nine semitones or four and a half whole-steps apart.</p>
-                                    <p>Recognizable Example: The first two notes of "My Bonnie Lies Over the Ocean" form a major sixth interval.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Minor Seventh (m7):</strong>
-                                    <p>Description: The minor seventh is ten semitones or five whole-steps apart.</p>
-                                    <p>Recognizable Example: The first two notes of the "Twilight Zone" theme are a minor seventh apart.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Major Seventh (M7):</strong>
-                                    <p>Description: The major seventh is eleven semitones or five and a half whole-steps apart.</p>
-                                    <p>Recognizable Example: The first two notes of "Take On Me" by A-ha create a major seventh interval.</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="slide">
-                            <ul>
-                                <li>
-                                    <strong>Octave (P8):</strong>
-                                    <p>Description: The octave is twelve semitones or six whole-steps apart, and it's the same note name at a different register.</p>
-                                    <p>Recognizable Example: The famous "Somewhere Over the Rainbow" melody begins with an octave jump.</p>
-                                </li>
-                            </ul>
-                        </div>
+                        <button class="prev-button">Previous</button>
+                        <button class="next-button">Next</button>
                     </div>
-                    <button class="prev-button">Previous</button>
-                    <button class="next-button">Next</button>
                 </div>
-            </div>
+
+                <section id="singlenotesView" class="view">
+                    <div class="nav-buttons single-notes-buttons">
+                        <button>C</button>
+                        <button>Csharp</button>
+                        <button>D</button>
+                        <button>Dsharp</button>
+                        <button>E</button>
+                        <button>F</button>
+                        <button>Fsharp</button>
+                        <button>G</button>
+                        <button>Gsharp</button>
+                        <button>A</button>
+                        <button>Asharp</button>
+                        <button>B</button>
+                    </div>
+                    <section class="nav-buttons play-button">
+                        <button class="play-button__play-single-note">Play</button>
+                    </section>
+                </section>
+
         </main>
         <footer>
             <h2>Author: Pavle Paunovic</h2>
         </footer>
         <script src="javascript/main.js"></script>
         <script src="javascript/slider.js"></script>
+        <script src="javascript/single-notes.js"></script>
     </body>
 </html>

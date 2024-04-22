@@ -3,6 +3,7 @@
 @import url(buttons.css);
 @import url(piano.css);
 @import url(slider.css);
+@import url(view.css);
 
 
 * {
@@ -65,4 +66,9 @@ h2 {
     font-style: italic;
     text-align: center;
     padding: 2rem;
+}
+
+.score__total-score {
+    color: #fff;
+    font-size: 2rem;
 }
