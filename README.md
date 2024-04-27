@@ -7,3 +7,6 @@ Version 1 done.
 TODO: Refactors JS
 
 Update: Single-Note refactored
+Update 2: Main Refactoring
+
+Needs a little bit more cleaning of code
