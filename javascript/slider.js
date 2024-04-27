@@ -1,23 +1,35 @@
-(() => {
-    let currentSlide = 0;
-    function showSlide(index) {
-        if (index < 0) {
-            currentSlide = slides.length - 1;
-        } else if (index >= slides.length) {
-            currentSlide = 0;
-        }
-    
-        slides.forEach((slide, i) => {
-            slide.style.display = i === currentSlide ? 'block' : 'none';
+let currentSlide = 0;
+
+function updateCurrentSlide(index, slidesLength) {
+    if (index < 0) {
+        currentSlide = slidesLength - 1;
+    } else if (index >= slidesLength) {
+        currentSlide = 0;
+    } else {
+        currentSlide = index;
+    }
+}
+
+
+function showSlide(index) {
+    const slides = queryItems("slides"); 
+    updateCurrentSlide(index, slides.length);
+    slides.forEach((slide, i) => {
+        slide.style.display = i === currentSlide ? 'block' : 'none';
+    });
+}
+
+function setupNavigationButtons() {
+    const prevButton = queryItems("prevButton", true);
+    const nextButton = queryItems("nextButton", true); 
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
         });
     }
-    const addEventListenerToButton = (button, increment) => {
-        button.addEventListener('click', () => {
-            currentSlide += increment;
-            showSlide(currentSlide);
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
         });
-    };
-    addEventListenerToButton(prevButton, -1);
-    addEventListenerToButton(nextButton, 1);
-    showSlide(currentSlide);
-})();
+    }
+}

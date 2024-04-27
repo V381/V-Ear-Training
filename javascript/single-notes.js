@@ -1,25 +1,5 @@
-
-const state = {
-  currentNote: null
-}
-
-function queryItems(item, single = false) {
-  const items = {
-    "links": `a[id$="Link"]`,
-    "playButton": ".play-button__play-single-note",
-    "singleNotes": ".single-notes-buttons > button",
-    "singlenotesView": `#${item}`,
-    "intervalsView": `#${item}` 
-  };
-  return single ? document.querySelector(items[item]) : document.querySelectorAll(items[item]);
-}
-
-function forEach(f, collection) {
-  Array.from(collection).forEach(item => f(item));
-}
-
 function toggleView(viewId) {
-  const targetId = viewId + 'View';  
+  const targetId = viewId 
   const selectedView = queryItems(targetId, true);  
   if (selectedView) {
       selectedView.classList.add('active'); 
@@ -47,28 +27,11 @@ function updateActiveLink(activeElement) {
   activeElement.classList.add('active');
 }
 
-function triggerEvent(event) {
-  event.preventDefault();
-  const el = event.currentTarget;
-
-  if (el.dataset.view) {
-    const viewId = el.dataset.view; 
-    toggleView(viewId);
-    updateActiveLink(el);
-  } else if (el.classList.contains('note-button')) {
-    const userGuess = el.textContent;
-    guessNote(userGuess, state.currentNote, updateScores);
-  } else if (el.classList.contains('play-button')) {
-    playGame();
-  }
-}
-
-
 
 function addEventsToElements() {
   const links = queryItems("links");
   const buttons = queryItems("singleNotes");
-  const playButton = queryItems("playButton", true);
+  const playButton = queryItems("playButtonInterval", true);
 
   forEach(link => {
     link.addEventListener("click", triggerEvent);
@@ -101,22 +64,20 @@ function guessNote(userGuess, currentNote, updateScores) {
 }
 
 function updateScores(isCorrect) {
+  const correctScoreDisplay = queryItems("correctScore", true);
+  const incorrectScoreDisplay = queryItems("incorrectScore", true)
   if (isCorrect) {
-    correctScore++;
-    correct.innerHTML = correctScore;
+    state.correctScore++;
+    correctScoreDisplay.innerHTML = state.correctScore;
     disableButtons(true);
   } else {
-    incorrectScore--;
-    scoreIncorrect.innerHTML = incorrectScore;
-    disableButtons(false);
+    state.incorrectScore--;
+    incorrectScoreDisplay.innerHTML = state.incorrectScore;
+    disableButtons(true);
   }
 }
 function getRandomNote(notes) {
   return notes[Math.floor(Math.random() * notes.length)];
-}
-function playNoteByKey(note) {
-  const audio = new Audio(`assets/${note}.mp3`);
-  audio.play();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
