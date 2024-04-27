@@ -1,100 +1,125 @@
-(() => {
-    const links = document.querySelectorAll('a[id$="Link"]');
-    const playButton = document.querySelector('.play-button__play-single-note');
-    const noteButtons = document.querySelectorAll('.single-notes-buttons > button');
-    let currentNote;
-    const 
-        notesMap = {
-            "A": "A",
-            "Asharp": "A#",
-            "B": "B",
-            "C": "C",
-            "Csharp": "C#",
-            "D": "D",
-            "Dsharp": "D#",
-            "E": "E",
-            "F": "F",
-            "Fsharp": "F#",
-            "G": "G",
-            "Gsharp": "G#"
-        }
 
-    function disableOrEnableButtons(flag) {
-        noteButtons.forEach(button => {
-            button.disabled = flag;
-        })
-    }
+const state = {
+  currentNote: null
+}
 
-    disableOrEnableButtons(true);
+function queryItems(item, single = false) {
+  const items = {
+    "links": `a[id$="Link"]`,
+    "playButton": ".play-button__play-single-note",
+    "singleNotes": ".single-notes-buttons > button",
+    "singlenotesView": `#${item}`,
+    "intervalsView": `#${item}` 
+  };
+  return single ? document.querySelector(items[item]) : document.querySelectorAll(items[item]);
+}
 
-    links.forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        const viewId = link.dataset.view;
-        toggleView(viewId);
-        updateActiveLink(link);
-      });
-    });
-  
-    function toggleView(viewId) {
-      const selectedView = document.getElementById(viewId + 'View');
-      if (selectedView) {
-        selectedView.classList.add('active');
-        document.querySelectorAll('.view').forEach(view => {
-          if (view !== selectedView) {
-            view.classList.remove('active');
+function forEach(f, collection) {
+  Array.from(collection).forEach(item => f(item));
+}
+
+function toggleView(viewId) {
+  const targetId = viewId + 'View';  
+  const selectedView = queryItems(targetId, true);  
+  if (selectedView) {
+      selectedView.classList.add('active'); 
+      forEach(view => {
+          if (view !== selectedView && view.classList.contains('view')) {
+              view.classList.remove('active');
           }
-        });
-      }
-    }
+      }, document.querySelectorAll('.view')); 
+  } else {
+      console.error("No element found with ID:", targetId);
+  }
+}
+function disableButtons(flag = true) {
+  const buttons = queryItems("singleNotes");
+  return forEach(button => {
+    button.disabled = flag;
+  }, buttons);
+}
 
-    noteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const userGuess = button.textContent;
-          guessNote(userGuess, currentNote);
-        });
-      });
+function updateActiveLink(activeElement) {
+  const links = queryItems("links");
+  forEach(link => {
+    link.classList.remove('active'); 
+  }, links);
+  activeElement.classList.add('active');
+}
 
-    function updateActiveLink(clickedLink) {
-        links.forEach(link => {
-          link.classList.remove('active-link');
-        });
+function triggerEvent(event) {
+  event.preventDefault();
+  const el = event.currentTarget;
 
-        clickedLink.classList.add('active-link');
-      }
+  if (el.dataset.view) {
+    const viewId = el.dataset.view; 
+    toggleView(viewId);
+    updateActiveLink(el);
+  } else if (el.classList.contains('note-button')) {
+    const userGuess = el.textContent;
+    guessNote(userGuess, state.currentNote, updateScores);
+  } else if (el.classList.contains('play-button')) {
+    playGame();
+  }
+}
 
 
-      playButton.addEventListener('click', function() {
-        disableOrEnableButtons(false);
-        playGame();
-      });
-      
-      function playGame() {
-        disableOrEnableButtons(false);
-        currentNote = getRandomNote();
-        playNoteByKey(currentNote);
-      }
-      
-      function guessNote(userGuess) {
-        if (userGuess === currentNote) {
-          currentNote = null;
-          correctScore++
-          correct.innerHTML = correctScore;
-          disableOrEnableButtons(true);
-        } else {
-          disableOrEnableButtons(false);
-          incorrectScore--;
-          scoreIncorrect.innerHTML = incorrectScore;
-        }
-      }
-      
-      function playNoteByKey(note) {
-        const audio = new Audio(`assets/${note}.mp3`);
-        audio.play();
-      }
-      
-      function getRandomNote() {
-        const notes = ['C', 'Csharp', 'D', 'Dsharp', 'E', 'F', 'Fsharp', 'G', 'Gsharp', 'A', 'Asharp', 'B'];
-        return notes[Math.floor(Math.random() * notes.length)];
-      }
-})();
+
+function addEventsToElements() {
+  const links = queryItems("links");
+  const buttons = queryItems("singleNotes");
+  const playButton = queryItems("playButton", true);
+
+  forEach(link => {
+    link.addEventListener("click", triggerEvent);
+  }, links);
+
+  forEach(button => {
+    button.classList.add('note-button');
+    button.addEventListener("click", triggerEvent);
+  }, buttons);
+
+  if (playButton) {
+    playButton.classList.add('play-button');
+    playButton.addEventListener("click", triggerEvent);
+  }
+}
+
+function playGame() {
+  const notes = ['C', 'Csharp', 'D', 'Dsharp', 'E', 'F', 'Fsharp', 'G', 'Gsharp', 'A', 'Asharp', 'B'];
+  disableButtons(false);
+  state.currentNote = getRandomNote(notes);
+  playNoteByKey(state.currentNote);
+}
+
+function guessNote(userGuess, currentNote, updateScores) {
+  if (userGuess === state.currentNote) {
+    updateScores(true);
+  } else {
+    updateScores(false);
+  }
+}
+
+function updateScores(isCorrect) {
+  if (isCorrect) {
+    correctScore++;
+    correct.innerHTML = correctScore;
+    disableButtons(true);
+  } else {
+    incorrectScore--;
+    scoreIncorrect.innerHTML = incorrectScore;
+    disableButtons(false);
+  }
+}
+function getRandomNote(notes) {
+  return notes[Math.floor(Math.random() * notes.length)];
+}
+function playNoteByKey(note) {
+  const audio = new Audio(`assets/${note}.mp3`);
+  audio.play();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  disableButtons();
+  addEventsToElements(); 
+});
