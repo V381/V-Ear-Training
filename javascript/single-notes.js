@@ -1,21 +1,7 @@
-function toggleView(viewId) {
-  const targetId = viewId 
-  const selectedView = queryItems(targetId, true);  
-  if (selectedView) {
-      selectedView.classList.add('active'); 
-      forEach(view => {
-          if (view !== selectedView && view.classList.contains('view')) {
-              view.classList.remove('active');
-          }
-      }, document.querySelectorAll('.view')); 
-  } else {
-      console.error("No element found with ID:", targetId);
-  }
-}
-function disableButtons(flag = true) {
-  const buttons = queryItems("singleNotes");
-  return forEach(button => {
-    button.disabled = flag;
+function disableButtons(selector, flag = true) {
+  const buttons = queryItems(selector, false);  
+  forEach(button => {
+      button.disabled = flag;
   }, buttons);
 }
 
