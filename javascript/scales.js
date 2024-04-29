@@ -43,10 +43,10 @@ function checkUserGuess(guess) {
 
     if (guess === state.currentScale) {
         state.correctScore++;
-        correctScoreDisplay.textContent = state.correctScore;
+        correctScoreDisplay.innerHTML = state.correctScore;
     } else {
-        state.incorrectScore++;
-        incorrectScoreDisplay.textContent = state.incorrectScore;
+        state.incorrectScore--;
+        incorrectScoreDisplay.innerHTML = state.incorrectScore;
         
     };
     state.isPlaying = false;
