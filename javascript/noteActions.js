@@ -19,7 +19,7 @@ function addActionToPlayButton(playButton) {
 
 function getRandomInterval() {
     const intervals = [
-        "Minor 1st",
+        "Minor 2nd",
         "Major 2nd",
         "Minor 3rd",
         "Major 3rd",
